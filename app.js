@@ -1,7 +1,7 @@
-// if (process.env.NODE_ENV !== "production") {
-// }
-require('dotenv').config()
-
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config()
+}
+// mongodb+srv://thundergod811:<password>@thundercluster.mbdfsr9.mongodb.net/?retryWrites=true&w=majority
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -19,16 +19,26 @@ const multer = require('multer');
 const { storage, cloudinary } = require('./cloudinary/index');
 const upload = multer({ storage })
 const mongoSanitize = require("express-mongo-sanitize");
-const helmet = require('helmet');
+const MongoStore = require("connect-mongo");
+// const helmet = require('helmet');
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/recipes-webapp';
 
-
-mongoose.connect('mongodb://localhost:27017/recipes-webapp')
-    .then(() => {
-        console.log("connected to db successfully");
+mongoose.connect(dbUrl, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     })
-    .catch((e) => {
-        console.log("db connection error:", e);
-    });
+    // .then(() => {
+    //     console.log("connected to db successfully");
+    // })
+    // .catch((e) => {
+    //     console.log("db connection error:", e);
+    // });
+
+const db = mongoose.connection;
+db.on('error',console.error.bind(console,"db connection error:"));
+db.once('open',() => {
+    console.log("Database connected");
+});
 
 app.engine('ejs', ejsMate);
 app.set('views', path.join(__dirname, 'views'));
@@ -39,9 +49,21 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
-app.use(session({
+const secret = process.env.SECRET || "recipewebapppratham";
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+})
+
+store.on('error',function(e) {
+    console.log("Session store error:",e);
+})
+
+const sessionInfo = {
+    store,
     name: "recipes",
-    secret: "recipewebapppratham",
+    secret,
     resave: false,
     saveUninitialized: false,
     rolling: true,
@@ -51,7 +73,9 @@ app.use(session({
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
-}))
+}
+
+app.use(session(sessionInfo))
 
 app.use(flash());
 
@@ -119,10 +143,10 @@ app.get('/user/new', (req, res) => {
     res.render('newuser', { webpageheading: "Login/Sign Up - TastyFoods.com" })
 })
 
-app.get('/user/:uid',catchAsync(async(req,res) => {
-    const {uid} = req.params;
+app.get('/user/:uid', catchAsync(async(req, res) => {
+    const { uid } = req.params;
     const user = await User.findById(uid);
-    res.render('user', {webpageheading: `${user.username} - TastyFoods.com`});
+    res.render('user', { webpageheading: `${user.username} - TastyFoods.com` });
 }))
 
 app.post('/login', catchAsync(async(req, res, next) => {
