@@ -1,0 +1,45 @@
+<%- layout('./layouts/boilerplate') %>
+<section class="user-recipes-display-section">
+    <h2>All Recipes by <%= user.username %></h2>
+    <% if (recipes.length) { %>
+        <div id="index-search-bar">
+            <input type="search" id="recipe-search" name="recipe-search" placeholder="Search for recipes by name, ingredients or cook name">
+        </div>
+    <% } %>
+    <main class="user-recipes-main">
+        <% if (recipes.length) { %>
+            <% for (let recipe of recipes){ %>
+                <div class="recipe-card" id="userpage-recipe-card">
+                    <% let img = recipe.images[0] %>
+                    <img src="<%= img.url %>" id="card-image" alt="">
+                    <div class="card-content">
+                        <h3><%= recipe.title %></h3>
+                        <p id="recipe-desc"><%= recipe.description %></p>
+                        <% if (openSessions && openSessions.username === user.username) { %>
+                            <div class="card-logos" id="edit-delete-btn">
+                                <a href="/user/recipes/<%= recipe._id %>/edit"><button>Edit</button></a>
+                                <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
+                                    <button onclick="return confirm('Are you sure you want to delete this recipe?');">Delete</button>
+                                </form>
+                                <span><a href="/recipes/<%= recipe._id %>">View Recipe</a></span>
+                            </div>
+                        <% } else { %>
+                        <div class="card-logos">
+                            <img src="/images/icons8-heart-24.png" alt="">
+                            <img src="/images/icons8-share-24.png" alt="">
+                            <span><a href="/recipes/<%= recipe._id %>">View Recipe</a></span>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        <% } else { %>
+            <% if (openSessions && openSessions.username === user.username) { %>
+                <p>Sorry, You have no recipes here.<a href="/recipe/new">Create a new recipe</a></p>
+            <% } else { %> 
+                <p>Sorry, No recipes to display :(</p>
+            <% } %> 
+        <% } %> 
+    </main>
+</section>
+
