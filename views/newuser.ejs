@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= webpageheading %>
+    </title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+
+<body>
+    <div class="new-user-hero">
+        <h1><a href="/">Back to TastyFoods.com</a></h1>
+        <div class="register-form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button class="toggle-btn" id="head-login" type="button">Log In</button>
+                <button class="toggle-btn" id="head-signup" type="button">Sign Up</button>
+            </div>
+            <p id="login-error-msg">
+                <%= loginErrorMsg %>
+            </p>
+            <!-- Log in form -->
+            <form id="login-form" class="input-group" method="post" action="/login">
+                <input type="text" id="username" name="username" class="input-field" placeholder="Enter Username" required>
+                <input type="password" name="password" id="password" class="input-field" placeholder="Enter Password" required>
+                <button type="submit" class="submit-btn" id="login">Log In</button>
+            </form>
+
+            <!-- Sign in form -->
+            <form id="signup-form" class="input-group" action="/user" method="post">
+                <input type="text" id="first" name="first" class="input-field" placeholder="Enter your name" required>
+                <input type="email" id="email" name="email" class="input-field" placeholder="Your email: hello@gmail.com" required>
+                <input type="text" id="username" name="username" placeholder="Enter Username" class="input-field" required>
+                <input type="password" id="password" class="input-field" name="password" placeholder="Enter Password" required>
+                <button type="submit" class="submit-btn" id="signup">Sign Up</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+<script src="/js/registerpage.js"></script>
+<script src="/js/formvalidation.js"></script>
+
+</html>
