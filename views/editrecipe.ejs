@@ -1,0 +1,29 @@
+<%- layout('./layouts/boilerplate') %>
+    <main class="edit-recipe-main">
+        <h3>Edit Your Recipe</h3>
+        <form action="/user/recipes/<%= userRecipe._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+            <div class="input-fields">
+                <label for="title">Enter Recipe title</label>
+                <input type="text" name="title" id="title" placeholder="Enter title" value="<%= userRecipe.title %>" required>
+            </div>
+            <div class="input-fields">
+                <label for="description">Enter brief description</label>
+                <input type="text" name="description" id="description" placeholder="Brief description" value="<%= userRecipe.description %>" required>
+            </div>
+            <div class="input-fields">
+                <label for="images">Add images</label>
+                <input type="file" name="images" id="images" multiple>
+                <span>Max Images: 5</span>
+                <span>Allowed formats: jpeg, png, jpg, jfif, note that this will delete all previously uploaded images, else leave blank.</span>
+            </div>
+            <div class="input-fields">
+                <label for="ingredients">Enter ingredients</label>
+                <textarea name="ingredients" id="ingredients" cols="35" rows="10" placeholder="Write list of Ingredients" required><%= userRecipe.ingredients %></textarea>
+            </div>
+            <div class="input-fields">
+                <label for="method">Describe recipe</label>
+                <textarea name="method" id="method" cols="50" rows="10" placeholder="Write method for recipe" required><%= userRecipe.method %></textarea>
+            </div>
+            <button type="submit">Update Recipe</button>
+        </form>
+    </main>
