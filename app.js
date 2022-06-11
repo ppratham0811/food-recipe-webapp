@@ -260,6 +260,7 @@ app.use((err, req, res, next) => {
     res.status(status).render('errorpage', { err, webpageheading: `Error (${status})` });
 })
 
-app.listen(3000, () => {
-    console.log("app on port 3000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log("app on port",port);
 })
