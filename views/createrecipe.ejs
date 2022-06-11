@@ -1,0 +1,29 @@
+<%- layout('./layouts/boilerplate') %>
+<main class="create-recipe-main">
+    <h3>Post your new recipe</h3>
+    <form action="/recipe" method="post" enctype="multipart/form-data">
+        <div class="input-fields">
+            <label for="title">Enter Recipe title</label>
+            <input type="text" name="title" id="title" placeholder="Enter title" required>
+        </div>
+        <div class="input-fields">
+            <label for="images">Upload images</label>
+            <input type="file" name="images" id="images" multiple>
+            <span>Max Images: 5</span>
+            <span>Allowed formats: jpeg, png, jpg, jfif</span>
+        </div>
+        <div class="input-fields">
+            <label for="description">Enter brief description</label>
+            <input type="text" name="description" id="description" placeholder="Brief description" required>
+        </div>
+        <div class="input-fields">
+            <label for="ingredients">Enter ingredients</label>
+            <textarea name="ingredients" id="ingredients" cols="50" rows="10" placeholder="Write list of Ingredients" required></textarea>
+        </div>
+        <div class="input-fields">
+            <label for="method">Describe recipe</label>
+            <textarea name="method" id="method" cols="70" rows="15" placeholder="Write method for recipe" required></textarea>
+        </div>
+        <button type="submit">Upload this Recipe</button>
+    </form>
+</main>
