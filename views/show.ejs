@@ -1,0 +1,59 @@
+<%- layout('./layouts/boilerplate') %>
+    <div class="recipe-div">
+        <h2>
+            <%= recipe.title %>
+        </h2>
+        <div id="recipe-show-img">
+            <% for (let img of recipe.images){ %>
+                <img src="<%= img.url %>" alt="<%= img.filename %>">
+                <% } %>
+        </div>
+        <div class="recipe-content">
+            <h4>Recipe uploaded by:
+                <a href="/user/<%= recipe.cook._id %>/recipes">
+                    <%= recipe.cook.username %>
+                </a>
+            </h4>
+            <h4>Description:
+                <%= recipe.description %>
+            </h4>
+            <span>Ingredients</span>
+            <pre id="ingredients"><%= recipe.ingredients %></pre>
+            <span>Method</span>
+            <pre id="method"><%= recipe.method %></pre>
+        </div>
+
+        <% if (openSessions && openSessions.username===recipe.cook.username) { %>
+            <div class="edit-delete-btns">
+                <a href="/user/recipes/<%= recipe._id %>/edit"><button>Edit</button></a>
+                <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
+                    <button onclick="return confirm('Are you sure you want to delete this recipe?');">Delete</button>
+                </form>
+            </div>
+        <% } %>
+
+            <div id="comments-section">
+            <% if (openSessions && openSessions.username!==recipe.cook.username) { %>
+                <div id="add-comment">
+                    <form action="/recipes/<%= recipe._id %>" method="post">
+                        <label for="comment">Add Comment</label>
+                        <input type="text" id="comment" name="comment" placeholder="Add comment here" required>
+                        <button type="submit">Post comment</button>
+                    </form>
+                </div>
+            <% } %>
+            <div id="all-comments">
+                <% if (recipe.comments.length>0) { %>
+                    <h4>All Comments</h3>
+                        <% for (let comment of recipe.comments){ %>
+                            <div class="comment">
+                                <span><%= comment.user.username %>:</span>
+                                <p>
+                                    <%= comment.comment %>
+                                </p>
+                            </div>
+                        <% } %>
+                <% } %>
+            </div>
+        </div>
+    </div>
