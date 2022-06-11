@@ -35,7 +35,7 @@
                 <li><a href="/user/<%= openSessions._id %>/recipes">Your Kitchen</a></li>
                 <li><a href="/user/<%= openSessions._id %>">Profile Settings</a></li>
                 <form action="/logout" method="post" id="logout-form-btn">
-                    <li><button id="logout-btn" onclick="return confirm('Are you sure you want to logout?')">Logout</button></li>
+                    <button id="logout-btn" onclick="return confirm('Are you sure you want to logout?')">Logout</button>
                 </form>
             <% } else { %>
                 <li><a href="/user/new">Login</a></li>
@@ -46,8 +46,8 @@
     
         <div class="footer">
             <p>&copy; 2022-23 FSD Assignment - Prathamesh Potabatti</p>
-            <p>Source code: <a href="https://github.com/ppratham0811/food-recipe-webapp"><img class="footer-logos" src="/icons8-github-24.png" alt="git"></a></p>
-            <p>Contact me: <a href="https://www.linkedin.com/in/prathamesh-potabatti/"><img class="footer-logos" src="/icons8-linkedin.png" alt=""></a></p>
+            <p>Source code: <a href="https://github.com/ppratham0811/food-recipe-webapp" target="_blank"><img class="footer-logos" src="/icons8-github-24.png" alt="git"></a></p>
+            <p>Contact me: <a href="https://www.linkedin.com/in/prathamesh-potabatti/" target="_blank"><img class="footer-logos" src="/icons8-linkedin.png" alt=""></a></p>
         </div>
     </nav>
         <main>
