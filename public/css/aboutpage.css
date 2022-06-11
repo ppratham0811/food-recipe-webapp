@@ -1,0 +1,20 @@
+body {
+    width: 80%;
+    font-family: "Montserrat", sans-serif;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin: 12px auto;
+}
+
+h2 {
+    margin: 8px auto;
+}
+
+main {
+    width: 80%;
+    margin: 20px auto;
+}
+

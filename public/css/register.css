@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+h1 a {
+    text-decoration: none;
+    color: white;
+}
+
+#head-login, #head-signup {
+    font-size: 0.8rem;
+}
+
+.new-user-hero h1 {
+    text-align: center;
+    margin: 30px auto 0 auto;
+}
+
+.new-user-hero {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('/images/bgimage.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+
+.register-form-box {
+    width: 380px;
+    height: 450px;
+    position: relative;
+    margin: 3% auto;
+    background: white;
+    padding: 5px;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+.button-box {
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #ff42422f;
+    border-radius: 1.1em;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    font-weight: bold;
+}
+
+#btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ff6b6b;
+    height: 100%;
+    width: 110px;
+    border-radius: 1.1em;
+    transition: .5s;
+}
+
+.input-group {
+    position: absolute;
+    margin: 8px auto;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    transition: .5s;
+    width: 100%;
+    left: 0;
+}
+.input-group:nth-of-type(1) * {
+    margin: 20px 0;
+}
+.input-group:nth-of-type(2) * {
+    margin: 8px 0;
+}
+.input-field {
+    padding: 12px 4px;
+    width: 80%;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1.5px solid grey;
+    outline: none;
+    background: transparent;
+    transition: all .5s ease-out;
+}
+.input-field:focus {
+    transform: scale(1.02);
+}
+.submit-btn  {
+    padding: 10px 35px;
+    font-weight: bold;
+    border-radius: 2em;
+    background-color: #ffb6b6;
+    border: 1px solid #ffb6b6;
+    margin: 30px auto;
+    transition: all .4s ease-out;
+}
+.submit-btn:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+#signup {
+    margin: 22px auto;
+}
+
+#signup-form {
+    left: 380px;
+}
+
+#login-error-msg {
+    color: red;
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 auto;
+}

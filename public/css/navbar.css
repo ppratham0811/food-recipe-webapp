@@ -1,0 +1,51 @@
+nav {
+    margin: 0 10px 0 0;
+    background-color: #FF6363;
+    height: 100vh;
+    color: white;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+}
+
+#page-title-navbar {
+    margin: 15px 12px;
+}
+#page-title-navbar h1 a, #page-title-navbar h2 a {
+    color: white;
+}
+#nav-options {
+    margin: 8vh 12px;
+}
+#nav-options li a {
+    color: white;
+    transition: transform 0.2s ease-out;
+}
+#nav-options li a:hover {
+    text-decoration: underline;
+    transform: scale(1.05);
+}
+
+#nav-options li {
+    margin: 16px 0;
+}
+
+#logout-btn {
+    outline: none;
+    border: none;
+    color: white;
+    transition: transform .2s ease-out;
+    background: none;
+    font-size: 1rem;
+}
+#logout-btn:hover {
+    text-decoration: underline;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#logged-in-user {
+    font-size: 1.4rem;
+    font-weight: bolder;
+    letter-spacing: 1px;
+}

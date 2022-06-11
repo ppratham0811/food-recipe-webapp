@@ -1,0 +1,31 @@
+.user-recipes-display-section {
+    margin: 15px 40px 30px 40px;
+}
+
+.user-recipes-main {
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+/* #userpage-recipe-card {
+    height: 300px;
+} */
+
+#edit-delete-btn button {
+    background-color: rgb(14, 128, 199);
+    border: 1px solid rgb(14, 128, 199);
+    border-radius: 2em;
+    padding: 5px 10px;
+    margin: 10px 0;
+    color: white;
+    transition: transform .4s ease-out;
+}
+#edit-delete-btn form button {
+    background-color: rgb(255,90,90);
+    border: 1px solid rgb(255,90,90);
+}
+#edit-delete-btn button:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}

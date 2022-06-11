@@ -1,0 +1,25 @@
+.footer {
+    position: absolute;
+    bottom: 0px;
+    margin: 10px 10px;
+    font-size: 0.6rem;
+    color: rgb(0, 0, 0);
+}
+.footer a {
+    transition: transform 0.2s ease-out;
+    color: rgb(30,30,30);
+}
+.footer a:hover {
+    text-decoration: underline;
+    transform: scale(1.02);
+}
+.footer-logos {
+    height: 20px;
+    width: 20px;
+    margin: 0 2px;
+}
+
+.footer p:nth-of-type(2),.footer p:nth-of-type(3) {
+    display: flex;
+    align-items: center;
+}
