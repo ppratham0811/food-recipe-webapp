@@ -21,8 +21,7 @@ const upload = multer({ storage })
 const mongoSanitize = require("express-mongo-sanitize");
 const MongoStore = require("connect-mongo");
 // const helmet = require('helmet');
-const dbUrl = process.env.DB_URL
-// || 'mongodb://localhost:27017/recipes-webapp'
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/recipes-webapp'
 const { MongoClient, ObjectId } = require('mongodb');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -282,7 +281,7 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 3000;
 let collection;
-app.listen(3000, async () => {
+app.listen(port, async () => {
     try {
         await client.connect();
         collection = client.db('test').collection('recipes');
