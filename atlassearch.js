@@ -2,7 +2,7 @@ const { MongoClient } = require("mongodb");
 
 // connect to your Atlas cluster
 const uri =
-    "mongodb+srv://thundergod811:Prathamesh%40%29%2A11@thundercluster.mbdfsr9.mongodb.net/?retryWrites=true&w=majority";
+    process.env.DB_URL;
 
 const client = new MongoClient(uri);
 let docs = [];
