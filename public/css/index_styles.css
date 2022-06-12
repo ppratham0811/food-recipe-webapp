@@ -101,3 +101,16 @@ ul {
 .card-logos img:hover {
     cursor: pointer;
 }
+
+
+#search-results-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+#search-results-section {
+    margin: 15px 40px 30px 40px;
+}
+
+#search-results-section h3 {
+    margin: 15px 0;
+}
