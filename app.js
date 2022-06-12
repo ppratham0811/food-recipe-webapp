@@ -21,7 +21,11 @@ const upload = multer({ storage })
 const mongoSanitize = require("express-mongo-sanitize");
 const MongoStore = require("connect-mongo");
 // const helmet = require('helmet');
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/recipes-webapp';
+const dbUrl = process.env.DB_URL
+// || 'mongodb://localhost:27017/recipes-webapp'
+const { MongoClient, ObjectId } = require('mongodb');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 mongoose.connect(dbUrl, {
         useNewUrlParser: true,
@@ -35,8 +39,8 @@ mongoose.connect(dbUrl, {
     // });
 
 const db = mongoose.connection;
-db.on('error',console.error.bind(console,"db connection error:"));
-db.once('open',() => {
+db.on('error', console.error.bind(console, "db connection error:"));
+db.once('open', () => {
     console.log("Database connected");
 });
 
@@ -48,7 +52,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(cors());
 
+const client = new MongoClient(process.env.DB_URL);
 const secret = process.env.SECRET || "recipewebapppratham";
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -56,8 +64,8 @@ const store = MongoStore.create({
     touchAfter: 24 * 60 * 60
 })
 
-store.on('error',function(e) {
-    console.log("Session store error:",e);
+store.on('error', function(e) {
+    console.log("Session store error:", e);
 })
 
 const sessionInfo = {
@@ -138,6 +146,18 @@ app.get('/', async(req, res) => {
 app.get('/aboutpage', (req, res) => {
     res.render('about');
 })
+
+app.get('/search', catchAsync(async(req, res) => {
+    const { recipeSearch } = req.query;
+    let agg = [
+        {$search: {text: {query: `${recipeSearch}`, path: ["title", "ingredients"]}}},
+        {$limit: 20},
+        {$project: {_id: 1,title: 1, description: 1, ingredients: 1, method: 1, cook: 1, images: 1 }}
+    ];
+    let results = await collection.aggregate(agg).toArray();
+    // res.send(results);
+    res.render('search',{webpageheading: `${recipeSearch} results - TastyFoods.com`,results, recipeSearch});
+}))
 
 app.get('/user/new', (req, res) => {
     res.render('newuser', { webpageheading: "Login/Sign Up - TastyFoods.com" })
@@ -261,6 +281,13 @@ app.use((err, req, res, next) => {
 })
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log("app on port",port);
+let collection;
+app.listen(3000, async () => {
+    try {
+        await client.connect();
+        collection = client.db('test').collection('recipes');
+        console.log("app on port", port);
+    } catch(e) {
+        console.log(e);
+    }
 })
