@@ -2,13 +2,12 @@
 <section class="recipe-display-section">
     <h2>Discover New Recipes</h2>
     <div id="index-search-bar">
-        <input type="search" id="recipe-search" name="recipe-search" placeholder="Search for recipes by name, ingredients or cook name">
+        <form action="/search" method="get">
+            <input type="search" id="recipe-search" name="recipeSearch" placeholder="Search for recipes by name, ingredients">
+        </form>
     </div>
 
     <div class="recipes-display">
-        <div id="searched-recipes">
-
-        </div>
         <div id="all-recipes">
             <% for (let recipe of recipes){ %>
                 <div class="recipe-card">
