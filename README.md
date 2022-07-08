@@ -2,6 +2,8 @@
 
 ### FSD Assignment - Be Zen
 
+website link: http://pure-inlet-94200.herokuapp.com/
+
 A food recipe web app where users can create their account.
 They can view the recipes, add their comments to other recipes.
 Upload their own recipes along with images.
